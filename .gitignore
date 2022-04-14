@@ -1,0 +1,6 @@
+.vs/
+x64/
+circular_buffer.sln
+circular_buffer.vcxproj
+circular_buffer.vcxproj.filters
+circular_buffer.vcxproj.user
