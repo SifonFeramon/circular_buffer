@@ -44,10 +44,18 @@ void circular_buffer<T>::push(T element)
 {
 	std::lock_guard<std::mutex> lock(_lock);
 
-	_buffer[_write_index++] = element;
-	if (_write_index == _count_elements)
+	if (_isfull && _write_index == _read_index)
 	{
+		_read_index++;
+	}
+
+	_buffer[_write_index++] = element;
+
+	if (_write_index == _count_elements)
 		_write_index = 0;
+
+	if (_write_index == _read_index)
+	{
 		_isfull = true;
 	}
 }
@@ -59,6 +67,9 @@ T circular_buffer<T>::pop()
 
 	if (_read_index == _count_elements)
 		_read_index = 0;
+
+	if (!_isfull && _read_index == _write_index)
+		return T();
 
 	if (_isfull)
 		_isfull = !_isfull;

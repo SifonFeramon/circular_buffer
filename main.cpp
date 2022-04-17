@@ -5,9 +5,9 @@ int main(int argc, char* argv[])
 	printf("path %s", argv[0]);
 	circular_buffer<int> que(10);
 
-	for (std::size_t i = 0; i < 10; ++i)
+	for (std::size_t i = 0; i < 11; ++i)
 	{
-		que.push(i);
+		que.push(i+1);
 	}
 
 	int len = que.size()+1;
