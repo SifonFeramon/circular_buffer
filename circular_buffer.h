@@ -16,11 +16,12 @@ public:
 	};
 
 	std::size_t size() const;
+	std::size_t size_buffer() const { return _count_elements; };
 	void push(T element);
 	T pop();
 	T& operator[](const std::size_t index);
 	const T& operator[](const std::size_t index) const;
-	~circular_buffer() { delete[] _buffer; }
+	~circular_buffer() { delete[] _buffer; };
 private:
 	T *_buffer;
 	std::size_t _write_index;
