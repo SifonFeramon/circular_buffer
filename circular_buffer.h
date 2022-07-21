@@ -88,7 +88,7 @@ template <class T>
 T& circular_buffer<T>::operator[](const std::size_t index)
 {
 	std::lock_guard<std::mutex> lock(_lock);
-	if (empty() || index < size())
+	if (empty() || index > size())
 		return T();
 
 	return _buffer[(_read_index + index) % _count_elements];
@@ -98,7 +98,7 @@ template<class T>
 const T& circular_buffer<T>::operator[](const std::size_t index) const
 {
 	std::lock_guard<std::mutex> lock(_lock);
-	if (empty() || index < size())
+	if (empty() || index > size())
 		return T();
 
 	return _buffer[(_read_index + index) % _count_elements];
